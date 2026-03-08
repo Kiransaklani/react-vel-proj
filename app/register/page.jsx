@@ -108,7 +108,7 @@ function Register() {
 
         <p className="auth-footer">
           Already have an account?{" "}
-          <Link href="/login" className="auth-link">
+          <Link href="/login" prefetch={false} className="auth-link">
             Sign In
           </Link>
         </p>

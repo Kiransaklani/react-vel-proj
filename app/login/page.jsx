@@ -67,7 +67,7 @@ function Login() {
 
         <p className="auth-footer">
           Don't have an account?{" "}
-          <Link href="/register" className="auth-link">
+          <Link href="/register" prefetch={false} className="auth-link">
             Register
           </Link>
         </p>

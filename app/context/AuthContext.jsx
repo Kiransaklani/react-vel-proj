@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { API_ENDPOINTS } from "../config/api";
 
@@ -14,8 +14,11 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
+  const hasChecked = useRef(false);
 
   useEffect(() => {
+    if (hasChecked.current) return;
+    hasChecked.current = true;
     checkAuth();
   }, []);
 
@@ -27,6 +30,16 @@ export function AuthProvider({ children }) {
       if (!PUBLIC_PATHS.includes(pathname)) {
         router.push("/login");
       }
+      return;
+    }
+
+    // On public pages, use cached user data instead of calling API
+    if (PUBLIC_PATHS.includes(pathname)) {
+      const cached = localStorage.getItem("user");
+      if (cached) {
+        setUser(JSON.parse(cached));
+      }
+      setLoading(false);
       return;
     }
 
