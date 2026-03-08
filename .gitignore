@@ -9,8 +9,6 @@ out/
 build
 
 # env files
-.env
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -26,7 +24,6 @@ pnpm-debug.log*
 *.pem
 
 # editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 *.suo
@@ -37,3 +34,4 @@ pnpm-debug.log*
 
 # typescript
 next-env.d.ts
+config.bat
